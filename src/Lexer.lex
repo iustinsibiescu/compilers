@@ -30,10 +30,9 @@ LineTerminator = \r|\n|\r\n
 WhiteSpace     = {LineTerminator} | [ \t\f]
    
 
-dec_int_lit = 0 | [1-9][0-9]*
+integer = 0 | [1-9][0-9]*
    
-
-dec_int_id = [A-Za-z_][A-Za-z_0-9]*
+id = [A-Za-z_][A-Za-z_0-9]*
    
 %%
 
@@ -42,22 +41,17 @@ dec_int_id = [A-Za-z_][A-Za-z_0-9]*
    
 
     ";"                { return symbol(sym.SEMI); }
+    "+"                { return symbol(sym.PLUS); }
+    "-"                { return symbol(sym.MINUS); }
+    "*"                { return symbol(sym.TIMES); }
+    "/"                { return symbol(sym.DIVIDE); }
+    "("                { return symbol(sym.LPAREN); }
+    ")"                { return symbol(sym.RPAREN); }
    
 
-    "+"                { System.out.print(" + "); return symbol(sym.PLUS); }
-    "-"                { System.out.print(" - "); return symbol(sym.MINUS); }
-    "*"                { System.out.print(" * "); return symbol(sym.TIMES); }
-    "/"                { System.out.print(" / "); return symbol(sym.DIVIDE); }
-    "("                { System.out.print(" ( "); return symbol(sym.LPAREN); }
-    ")"                { System.out.print(" ) "); return symbol(sym.RPAREN); }
+    {integer}      { return symbol(sym.INTEGER); }
    
-
-    {dec_int_lit}      { System.out.print(yytext());
-                         return symbol(sym.NUMBER, new Integer(yytext())); }
-   
-    
-    {dec_int_id}       { System.out.print(yytext());
-                         return symbol(sym.ID, new Integer(1));}
+    {id}       { return symbol(sym.ID);}
    
 
     {WhiteSpace}       {  }   

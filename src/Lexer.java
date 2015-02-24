@@ -622,13 +622,11 @@ class Lexer implements java_cup.runtime.Scanner {
           }
         case 13: break;
         case 3: 
-          { System.out.print(yytext());
-                         return symbol(sym.NUMBER, new Integer(yytext()));
+          { return symbol(sym.INTEGER);
           }
         case 14: break;
         case 4: 
-          { System.out.print(yytext());
-                         return symbol(sym.ID, new Integer(1));
+          { return symbol(sym.ID);
           }
         case 15: break;
         case 5: 
@@ -636,27 +634,27 @@ class Lexer implements java_cup.runtime.Scanner {
           }
         case 16: break;
         case 6: 
-          { System.out.print(" + "); return symbol(sym.PLUS);
+          { return symbol(sym.PLUS);
           }
         case 17: break;
         case 7: 
-          { System.out.print(" - "); return symbol(sym.MINUS);
+          { return symbol(sym.MINUS);
           }
         case 18: break;
         case 8: 
-          { System.out.print(" * "); return symbol(sym.TIMES);
+          { return symbol(sym.TIMES);
           }
         case 19: break;
         case 9: 
-          { System.out.print(" / "); return symbol(sym.DIVIDE);
+          { return symbol(sym.DIVIDE);
           }
         case 20: break;
         case 10: 
-          { System.out.print(" ( "); return symbol(sym.LPAREN);
+          { return symbol(sym.LPAREN);
           }
         case 21: break;
         case 11: 
-          { System.out.print(" ) "); return symbol(sym.RPAREN);
+          { return symbol(sym.RPAREN);
           }
         case 22: break;
         default: 
