@@ -39,6 +39,7 @@ id = [A-Za-z_][A-Za-z_0-9]*
    
 <YYINITIAL> {
 
+    "main"             { return symbol(sym.MAIN); } 
     "while"            { return symbol(sym.WHILE); } 
     "do"               { return symbol(sym.DO); } 
     "od"               { return symbol(sym.OD); } 
@@ -56,6 +57,8 @@ id = [A-Za-z_][A-Za-z_0-9]*
     "/"                { return symbol(sym.DIVIDE); }
     "("                { return symbol(sym.LPAREN); }
     ")"                { return symbol(sym.RPAREN); }
+    "{"                { return symbol(sym.LCURL); }
+    "}"                { return symbol(sym.RCURL); }
    
 
     {integer}      { return symbol(sym.INTEGER_NUMBER); }

@@ -11,6 +11,7 @@ public class sym {
   public static final int PLUS = 7;
   public static final int RPAREN = 6;
   public static final int THEN = 16;
+  public static final int LCURL = 22;
   public static final int WHILE = 18;
   public static final int SEMI = 11;
   public static final int FI = 15;
@@ -23,10 +24,12 @@ public class sym {
   public static final int INTEGER_TYPE = 3;
   public static final int EOF = 0;
   public static final int DIVIDE = 10;
+  public static final int MAIN = 21;
   public static final int MINUS = 8;
   public static final int error = 1;
   public static final int ASSIGN = 13;
   public static final int INTEGER_NUMBER = 4;
+  public static final int RCURL = 23;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -48,7 +51,10 @@ public class sym {
   "ELSE",
   "WHILE",
   "DO",
-  "OD"
+  "OD",
+  "MAIN",
+  "LCURL",
+  "RCURL"
   };
 }
 

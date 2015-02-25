@@ -1,4 +1,6 @@
-while ( a+2) do
-	a : int := 0;
-	v := 10;
-od
+main {
+	while ( a+2) do
+		a : int := 0;
+		v := 10;
+	od
+}

@@ -20,8 +20,11 @@ parser code {:
 :};
    
 
-terminal ID, INTEGER_TYPE, INTEGER_NUMBER, LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD;
-non terminal Object  body, whileblock, ifblock, declrs, stmts, stmt, declr, init_declr, normal_declr, assignment, type, expr, factor, term;
+terminal ID, INTEGER_TYPE, INTEGER_NUMBER, LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD, MAIN, LCURL, RCURL;
+non terminal Object  main, body, whileblock, ifblock, declrs, stmts, stmt, declr, init_declr, normal_declr, assignment, type, expr, factor, term;
+
+
+   main ::= MAIN LCURL body RCURL
 
    body ::= declrs stmts
 	    | stmts
@@ -41,6 +44,7 @@ non terminal Object  body, whileblock, ifblock, declrs, stmts, stmt, declr, init
 
    stmt ::= ID assignment SEMI
             | ifblock
+	    | whileblock
             ;
 
    declr ::= normal_declr SEMI
