@@ -20,8 +20,12 @@ parser code {:
 :};
    
 
-terminal ID, INTEGER_TYPE, INTEGER_NUMBER, LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD, MAIN, LCURL, RCURL, COMMA, RETURN, FDEF;
-non terminal Object  function_body, return, return_val, function_declr, main, body, whileblock, ifblock, declrs, stmts, stmt, declr, init_declr, normal_declr, assignment, type, expr, factor, term;
+terminal ID, INTEGER_TYPE, FLOAT_TYPE, INTEGER_NUMBER, FLOAT_NUMBER, LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD, MAIN, LCURL, RCURL, COMMA, RETURN, FDEF;
+non terminal Object  program, function_body, return, return_val, function_declr, main, body, whileblock, ifblock, declrs, stmts, stmt, declr, init_declr, normal_declr, assignment, type, expr, factor, term, numerical_val;
+
+   program ::= function_body program
+	       | main
+	       ;
 
    function_body ::= FDEF ID LPAREN function_declr RPAREN LCURL body return RCURL COLON type SEMI
                     | FDEF ID LPAREN function_declr RPAREN LCURL body RCURL SEMI
@@ -31,7 +35,7 @@ non terminal Object  function_body, return, return_val, function_declr, main, bo
               | RETURN return_val SEMI
 	      ;
 
-   return_val ::= INTEGER_NUMBER;
+   return_val ::= numerical_val;
 
    function_declr ::= normal_declr COMMA function_declr
                    | normal_declr
@@ -71,7 +75,9 @@ non terminal Object  function_body, return, return_val, function_declr, main, bo
 
    assignment ::= ASSIGN expr;
 
-   type ::= INTEGER_TYPE;
+   type ::= INTEGER_TYPE
+	    | FLOAT_TYPE
+	    ;
    
    
    expr      ::= expr PLUS factor
@@ -87,8 +93,14 @@ non terminal Object  function_body, return, return_val, function_declr, main, bo
    
    
    term      ::= LPAREN expr RPAREN
-                 | INTEGER_NUMBER
+                 | numerical_val
                  | ID
                  ;
+
+   numerical_val ::= INTEGER_NUMBER
+		     | FLOAT_NUMBER
+	             | MINUS INTEGER_NUMBER
+		     | MINUS FLOAT_NUMBER
+                     ;
    
    
