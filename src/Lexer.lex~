@@ -41,7 +41,7 @@ id = [A-Za-z_][A-Za-z_0-9]*
    
 
     "int"              { return symbol(sym.INTEGER_TYPE);}
-    ":="               { retunr symbol(sym.ASSIGN);}
+    ":="               { return symbol(sym.ASSIGN);}
     ":"                { return symbol(sym.COLON);}
     ";"                { return symbol(sym.SEMI); }
     "+"                { return symbol(sym.PLUS); }

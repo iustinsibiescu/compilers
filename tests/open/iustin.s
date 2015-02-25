@@ -1,4 +1,8 @@
-a : int := 8;
-b : int;
-a := 8;
-c := 5+12; 
+if (2 + 2) then
+	a : int;
+	a:= 4;
+	b:= 5;
+	
+else
+	c:= 4;
+fi
