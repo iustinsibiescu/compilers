@@ -1,11 +1,11 @@
 fdef maisan () {
-	a : bool;
+	a : char := '!';
 	rata : rat := 2;
 	while ( a+2) do
 		a : int := 0;
 		v := 10;
 	od
-	return -3;
+	return 's';
 } : int;
 
 main {

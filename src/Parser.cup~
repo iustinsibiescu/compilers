@@ -20,7 +20,7 @@ parser code {:
 :};
    
 
-terminal ID, BOOLEAN_TYPE, INTEGER_TYPE, RATIONAL_TYPE, FLOAT_TYPE, BOOLEAN_VALUE, INTEGER_NUMBER, FLOAT_NUMBER, RATIONAL_NUMBER,  LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD, MAIN, LCURL, RCURL, COMMA, RETURN, FDEF;
+terminal ID, BOOLEAN_TYPE, CHARACTER_TYPE, INTEGER_TYPE, RATIONAL_TYPE, FLOAT_TYPE, BOOLEAN_VALUE, CHARACTER_VALUE, INTEGER_NUMBER, FLOAT_NUMBER, RATIONAL_NUMBER,  LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD, MAIN, LCURL, RCURL, COMMA, RETURN, FDEF;
 non terminal Object  program, function_body, return, return_val, function_declr, main, body, whileblock, ifblock, declrs, stmts, stmt, declr, init_declr, normal_declr, assignment, type, expr, factor, term, numerical_val;
 
    program ::= function_body program
@@ -34,7 +34,7 @@ non terminal Object  program, function_body, return, return_val, function_declr,
    return ::= RETURN return_val SEMI;
 
    return_val ::= expr
-		  | BOOLEAN_VALUE;
+		  | CHAR_VALUE;
 
    function_declr ::= normal_declr COMMA function_declr
                    | normal_declr
@@ -72,12 +72,14 @@ non terminal Object  program, function_body, return, return_val, function_declr,
 
    normal_declr ::= ID COLON type;
 
-   assignment ::= ASSIGN expr;
+   assignment ::= ASSIGN expr
+                  | ASSIGN CHAR_VALUE;
 
    type ::= INTEGER_TYPE
 	    | FLOAT_TYPE
             | RATIONAL_TYPE
             | BOOLEAN_TYPE
+            | CHARACTER_TYPE
 	    ;
    
    
