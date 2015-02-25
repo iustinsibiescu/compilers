@@ -32,9 +32,11 @@ WhiteSpace     = {LineTerminator} | [ \t\f]
 
 integer =0|[1-9][0-9]*
    
+
+
 float =0\.[0-9]+|[1-9][0-9]*\.[0-9]+
 
-id = [A-Za-z_][A-Za-z_0-9]*
+id =[A-Za-z_][A-Za-z_0-9]*
    
 %%
 
@@ -49,6 +51,7 @@ id = [A-Za-z_][A-Za-z_0-9]*
     "fi"               { return symbol(sym.FI); } 
     "then"             { return symbol(sym.THEN); } 
     "else"             { return symbol(sym.ELSE); }
+    "rat"              { return symbol(sym.RATIONAL_TYPE); }
     "float"            { return symbol(sym.FLOAT_TYPE); }
     "int"              { return symbol(sym.INTEGER_TYPE); }
     ":="               { return symbol(sym.ASSIGN);}
@@ -70,6 +73,7 @@ id = [A-Za-z_][A-Za-z_0-9]*
    
 
     {integer}      { return symbol(sym.INTEGER_NUMBER); }
+    {integer}_{integer}\/{integer}      { return symbol(sym.RATIONAL_NUMBER); }
     {float}      { return symbol(sym.FLOAT_NUMBER); }
    
     {id}       { return symbol(sym.ID);}

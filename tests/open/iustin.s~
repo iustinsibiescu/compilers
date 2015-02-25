@@ -7,7 +7,7 @@ fdef maisan () {
 } : int;
 
 main {
-	while ( a--2.33) do
+	while ( a+10-(--3_2/4 + gh)) do
 		a : int := 0;
 		v := 10;
 	od
