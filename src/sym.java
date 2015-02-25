@@ -7,6 +7,7 @@
 public class sym {
   /* terminals */
   public static final int TIMES = 9;
+  public static final int FDEF = 26;
   public static final int ELSE = 17;
   public static final int PLUS = 7;
   public static final int RPAREN = 6;
@@ -14,6 +15,7 @@ public class sym {
   public static final int LCURL = 22;
   public static final int WHILE = 18;
   public static final int SEMI = 11;
+  public static final int RETURN = 25;
   public static final int FI = 15;
   public static final int IF = 14;
   public static final int LPAREN = 5;
@@ -21,6 +23,7 @@ public class sym {
   public static final int ID = 2;
   public static final int OD = 20;
   public static final int DO = 19;
+  public static final int COMMA = 24;
   public static final int INTEGER_TYPE = 3;
   public static final int EOF = 0;
   public static final int DIVIDE = 10;
@@ -54,7 +57,10 @@ public class sym {
   "OD",
   "MAIN",
   "LCURL",
-  "RCURL"
+  "RCURL",
+  "COMMA",
+  "RETURN",
+  "FDEF"
   };
 }
 

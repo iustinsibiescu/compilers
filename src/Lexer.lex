@@ -59,6 +59,10 @@ id = [A-Za-z_][A-Za-z_0-9]*
     ")"                { return symbol(sym.RPAREN); }
     "{"                { return symbol(sym.LCURL); }
     "}"                { return symbol(sym.RCURL); }
+
+    "return"           { return symbol(sym.RETURN);} 
+    "fdef"             { return symbol(sym.FDEF);}
+    ","                { return symbol(sym.COMMA);}
    
 
     {integer}      { return symbol(sym.INTEGER_NUMBER); }
