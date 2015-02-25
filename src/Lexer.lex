@@ -40,6 +40,9 @@ id = [A-Za-z_][A-Za-z_0-9]*
 <YYINITIAL> {
    
 
+    "int"              { return symbol(sym.INTEGER_TYPE);}
+    ":="               { return symbol(sym.ASSIGN);}
+    ":"                { return symbol(sym.COLON);}
     ";"                { return symbol(sym.SEMI); }
     "+"                { return symbol(sym.PLUS); }
     "-"                { return symbol(sym.MINUS); }
@@ -49,7 +52,7 @@ id = [A-Za-z_][A-Za-z_0-9]*
     ")"                { return symbol(sym.RPAREN); }
    
 
-    {integer}      { return symbol(sym.INTEGER); }
+    {integer}      { return symbol(sym.INTEGER_NUMBER); }
    
     {id}       { return symbol(sym.ID);}
    

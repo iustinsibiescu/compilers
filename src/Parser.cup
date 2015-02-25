@@ -20,16 +20,16 @@ parser code {:
 :};
    
 
-terminal ID, INTEGER, LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI;
-non terminal Object  expr_list, expr_part, expr, factor, term;
+terminal ID, INTEGER_TYPE, INTEGER_NUMBER, LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN;
+non terminal Object  assignment, declr_part, declr, type, expr, factor, term;
 
-   expr_list ::= expr_list expr_part
-                 | expr_part
-		 ;
-   
-   
-   expr_part ::= expr SEMI
-                 ;
+   assignment ::= ID ASSIGN expr SEMI;
+
+   declr_part ::= declr SEMI;
+
+   declr ::= ID COLON type;
+
+   type ::= INTEGER_TYPE;
    
    
    expr      ::= expr PLUS factor
@@ -45,7 +45,7 @@ non terminal Object  expr_list, expr_part, expr, factor, term;
    
    
    term      ::= LPAREN expr RPAREN
-                 | INTEGER
+                 | INTEGER_NUMBER
                  | ID
                  ;
    
