@@ -21,10 +21,24 @@ parser code {:
    
 
 terminal ID, INTEGER_TYPE, INTEGER_NUMBER, LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN;
-non terminal Object  declr, init_declr, normal_declr, assignment, type, expr, factor, term;
+non terminal Object  body, stmt, declr, init_declr, normal_declr, assignment, type, expr, factor, term;
 
-   declr ::= normal_declr SEMI;
-            | init_declr SEMI;
+   body ::= declrs stmts
+	    | stmts
+            ;
+
+   declrs ::= declrs declr
+	    | declr;
+
+   stmts ::= stmts stmt
+            | stmt;
+
+   stmt ::= ID assignment SEMI
+            ;
+
+   declr ::= normal_declr SEMI
+            | init_declr SEMI
+            ;
 
    init_declr ::= normal_declr assignment;
 
