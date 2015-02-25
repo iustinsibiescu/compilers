@@ -1,4 +1,6 @@
 fdef maisan () {
+	a : bool;
+	rata : rat := 2;
 	while ( a+2) do
 		a : int := 0;
 		v := 10;

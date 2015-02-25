@@ -20,7 +20,7 @@ parser code {:
 :};
    
 
-terminal ID, INTEGER_TYPE, RATIONAL_TYPE, FLOAT_TYPE, INTEGER_NUMBER, FLOAT_NUMBER, RATIONAL_NUMBER,  LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD, MAIN, LCURL, RCURL, COMMA, RETURN, FDEF;
+terminal ID, BOOLEAN_TYPE, INTEGER_TYPE, RATIONAL_TYPE, FLOAT_TYPE, BOOLEAN_VALUE, INTEGER_NUMBER, FLOAT_NUMBER, RATIONAL_NUMBER,  LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD, MAIN, LCURL, RCURL, COMMA, RETURN, FDEF;
 non terminal Object  program, function_body, return, return_val, function_declr, main, body, whileblock, ifblock, declrs, stmts, stmt, declr, init_declr, normal_declr, assignment, type, expr, factor, term, numerical_val;
 
    program ::= function_body program
@@ -76,6 +76,7 @@ non terminal Object  program, function_body, return, return_val, function_declr,
    type ::= INTEGER_TYPE
 	    | FLOAT_TYPE
             | RATIONAL_TYPE
+            | BOOLEAN_TYPE
 	    ;
    
    
