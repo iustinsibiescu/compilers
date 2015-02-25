@@ -38,8 +38,11 @@ id = [A-Za-z_][A-Za-z_0-9]*
 
    
 <YYINITIAL> {
-   
 
+    "if"               { return symbol(sym.IF); } 
+    "fi"               { return symbol(sym.FI); } 
+    "then"             { return symbol(sym.THEN); } 
+    "else"             { return symbol(sym.ELSE); }
     "int"              { return symbol(sym.INTEGER_TYPE);}
     ":="               { return symbol(sym.ASSIGN);}
     ":"                { return symbol(sym.COLON);}

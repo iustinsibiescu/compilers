@@ -11,12 +11,15 @@ public class sym {
   public static final int PLUS = 7;
   public static final int RPAREN = 6;
   public static final int THEN = 16;
+  public static final int WHILE = 18;
   public static final int SEMI = 11;
   public static final int FI = 15;
   public static final int IF = 14;
   public static final int LPAREN = 5;
   public static final int COLON = 12;
   public static final int ID = 2;
+  public static final int OD = 20;
+  public static final int DO = 19;
   public static final int INTEGER_TYPE = 3;
   public static final int EOF = 0;
   public static final int DIVIDE = 10;
@@ -42,7 +45,10 @@ public class sym {
   "IF",
   "FI",
   "THEN",
-  "ELSE"
+  "ELSE",
+  "WHILE",
+  "DO",
+  "OD"
   };
 }
 

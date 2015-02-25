@@ -39,6 +39,9 @@ id = [A-Za-z_][A-Za-z_0-9]*
    
 <YYINITIAL> {
 
+    "while"            { return symbol(sym.WHILE); } 
+    "do"               { return symbol(sym.DO); } 
+    "od"               { return symbol(sym.OD); } 
     "if"               { return symbol(sym.IF); } 
     "fi"               { return symbol(sym.FI); } 
     "then"             { return symbol(sym.THEN); } 

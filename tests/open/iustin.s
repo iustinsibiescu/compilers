@@ -1,8 +1,4 @@
-if (2 + 2) then
-	a : int;
-	a:= 4;
-	b:= 5;
-	
-else
-	c:= 4;
-fi
+while ( a+2) do
+	a : int := 0;
+	v := 10;
+od
