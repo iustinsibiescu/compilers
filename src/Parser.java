@@ -227,19 +227,19 @@ public class Parser extends java_cup.runtime.lr_parser {
 
 
     
-    boolean syntaxErrors;
-    
-    public void syntax_error(Symbol current_token) {
-		syntaxErrors = true;
-    		report_error(
-			"Syntax error at line " + (current_token.left+1) + ", column "
-			+ current_token.right + current_token.toString() +"\n\n\n\n\n", null
-		);
-    }
-    public void report_fatal_error(String message, Object info) {
-    		report_error("", null);
-    		done_parsing();
-  }
+	boolean syntaxErrors;
+
+	public void syntax_error(Symbol current_token) {
+	syntaxErrors = true;
+	report_error(
+		"Syntax error at line " + (current_token.left+1) + ", column "
+		+ current_token.right + current_token.toString() +"\n\n\n\n\n", null
+	);
+	}
+	public void report_fatal_error(String message, Object info) {
+		report_error("", null);
+		done_parsing();
+	}
 
 
 

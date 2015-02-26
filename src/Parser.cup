@@ -3,107 +3,190 @@ import java_cup.runtime.*;
 
 parser code {:
     
-    boolean syntaxErrors;
-    
-    public void syntax_error(Symbol current_token) {
-		syntaxErrors = true;
-    		report_error(
-			"Syntax error at line " + (current_token.left+1) + ", column "
-			+ current_token.right + current_token.toString() +"\n\n\n\n\n", null
-		);
-    }
-    public void report_fatal_error(String message, Object info) {
-    		report_error("", null);
-    		done_parsing();
-  }
+	boolean syntaxErrors;
+
+	public void syntax_error(Symbol current_token) {
+	syntaxErrors = true;
+	report_error(
+		"Syntax error at line " + (current_token.left+1) + ", column "
+		+ current_token.right + current_token.toString() +"\n\n\n\n\n", null
+	);
+	}
+	public void report_fatal_error(String message, Object info) {
+		report_error("", null);
+		done_parsing();
+	}
 
 :};
    
 
-terminal ID, BOOLEAN_TYPE, CHARACTER_TYPE, INTEGER_TYPE, RATIONAL_TYPE, FLOAT_TYPE, BOOLEAN_VALUE, CHARACTER_VALUE, INTEGER_NUMBER, FLOAT_NUMBER, RATIONAL_NUMBER,  LPAREN, RPAREN, PLUS, MINUS, TIMES, DIVIDE, SEMI, COLON, ASSIGN, IF, FI, THEN, ELSE, WHILE, DO, OD, MAIN, LCURL, RCURL, COMMA, RETURN, FDEF;
-non terminal Object  program, function_body, return, return_val, function_declr, main, body, whileblock, ifblock, declrs, stmts, stmt, declr, init_declr, normal_declr, assignment, type, expr, factor, term, numerical_val;
+terminal 
+	ID,
+	BOOLEAN_TYPE,
+	CHARACTER_TYPE,
+	INTEGER_TYPE,
+	RATIONAL_TYPE,
+	FLOAT_TYPE,
+	BOOLEAN_VALUE,
+	CHARACTER_VALUE,
+	INTEGER_NUMBER,
+	FLOAT_NUMBER,
+	RATIONAL_NUMBER,
+	LPAREN,
+	RPAREN,
+	PLUS,
+	MINUS,
+	TIMES,
+	DIVIDE,
+	SEMI,
+	COLON,
+	ASSIGN,
+	IF,
+	FI,
+	THEN,
+	ELSE,
+	WHILE,
+	DO,
+	OD,
+	MAIN,
+	LCURL,
+	RCURL,
+	COMMA,
+	RETURN,
+	FDEF;
 
-   program ::= function_body program
-	       | main
-	       ;
+non terminal Object
+	program,
+	function_body,
+	return,
+	return_val,
+	function_declr,
+	main,
+	body,
+	whileblock,
+	ifblock,
+	declrs,
+	stmts,
+	stmt,
+	declr,
+	init_declr,
+	normal_declr,
+	assignment,
+	type,
+	expr,
+	factor,
+	term,
+	numerical_val;
 
-   function_body ::= FDEF ID LPAREN function_declr RPAREN LCURL body return RCURL COLON type SEMI
-                    | FDEF ID LPAREN function_declr RPAREN LCURL body RCURL SEMI
-		    ;
 
-   return ::= RETURN return_val SEMI;
+	program ::= 
+		function_body program
+		| main
+		;
 
-   return_val ::= expr
-		  | CHARACTER_VALUE;
+	function_body ::= 
+		FDEF ID LPAREN function_declr RPAREN LCURL body return RCURL COLON type SEMI
+		| FDEF ID LPAREN function_declr RPAREN LCURL body RCURL SEMI
+		;
 
-   function_declr ::= normal_declr COMMA function_declr
-                   | normal_declr
-                   |
-                   ;
+	return ::= 
+		RETURN return_val SEMI
+		;
 
-   main ::= MAIN LCURL body RCURL;
+	return_val ::= 
+		expr
+		| CHARACTER_VALUE
+		;
 
-   body ::= declrs stmts
-	    | stmts
-            ;
+	function_declr ::= 
+		normal_declr COMMA function_declr
+		| normal_declr
+		|
+		;
 
-   whileblock ::= WHILE LPAREN expr RPAREN DO body OD;
+	main ::= 
+		MAIN LCURL body RCURL
+		;
 
-   ifblock ::= IF LPAREN expr RPAREN THEN body ELSE body FI
-	      | IF LPAREN expr RPAREN THEN body FI 
-	      ; 
+	body ::= 
+		declrs stmts
+		| stmts
+		;
 
-   declrs ::= declrs declr
-	    | declr;
+	whileblock ::= 
+		WHILE LPAREN expr RPAREN DO body OD
+		;
 
-   stmts ::= stmts stmt
-            | stmt;
+	ifblock ::= 
+		IF LPAREN expr RPAREN THEN body ELSE body FI
+		| IF LPAREN expr RPAREN THEN body FI 
+		; 
 
-   stmt ::= ID assignment SEMI
-            | ifblock
-	    | whileblock
-            ;
+	declrs ::= 
+		declrs declr
+		| declr
+		;
 
-   declr ::= normal_declr SEMI
-            | init_declr SEMI
-            ;
+	stmts ::= 
+		stmts stmt
+		| stmt
+		;
 
-   init_declr ::= normal_declr assignment;
+	stmt ::= 
+		ID assignment SEMI
+		| ifblock
+		| whileblock
+		;
 
-   normal_declr ::= ID COLON type;
+	declr ::= 
+		normal_declr SEMI
+		| init_declr SEMI
+		;
 
-   assignment ::= ASSIGN expr
-                  | ASSIGN CHARACTER_VALUE;
+	init_declr ::= 
+		normal_declr assignment
+		;
 
-   type ::= INTEGER_TYPE
-	    | FLOAT_TYPE
-            | RATIONAL_TYPE
-            | BOOLEAN_TYPE
-            | CHARACTER_TYPE
-	    ;
-   
-   
-   expr      ::= expr PLUS factor
-                 | expr MINUS factor
-                 | factor
-                 ;
-   
-   
-   factor    ::= factor TIMES term
-                 | factor DIVIDE term
-                 | term
-                 | MINUS term
-                 ;
-   
-   
-   term      ::= LPAREN expr RPAREN
-                 | numerical_val
-                 | ID
-                 ;
+	normal_declr ::= 
+		ID COLON type
+		;
 
-   numerical_val ::= INTEGER_NUMBER
-		     | FLOAT_NUMBER
-		     | RATIONAL_NUMBER
-                     ;
+	assignment ::= 
+		ASSIGN expr
+		| ASSIGN CHARACTER_VALUE
+		;
+
+	type ::= 
+		INTEGER_TYPE
+		| FLOAT_TYPE
+		| RATIONAL_TYPE
+		| BOOLEAN_TYPE
+		| CHARACTER_TYPE
+		;
+
+	expr ::= 
+		expr PLUS factor
+		| expr MINUS factor
+		| factor
+		;
+
+	factor ::= 
+		factor TIMES term
+		| factor DIVIDE term
+		| term
+		| MINUS term
+		;
+
+	term ::= 
+		LPAREN expr RPAREN
+		| numerical_val
+		| ID
+		;
+
+	numerical_val ::= 
+		INTEGER_NUMBER
+		| FLOAT_NUMBER
+		| RATIONAL_NUMBER
+		;
    
    
