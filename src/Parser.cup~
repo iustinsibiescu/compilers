@@ -27,6 +27,7 @@ terminal
 	INTEGER_TYPE,
 	RATIONAL_TYPE,
 	FLOAT_TYPE,
+	DICT_TYPE,
 	BOOLEAN_VALUE,
 	CHARACTER_VALUE,
 	INTEGER_NUMBER,
@@ -62,7 +63,7 @@ terminal
 	RCURL,
 	COMMA,
 	RETURN,
-	RETURN_MAIN,
+	MAIN_RETURN,
 	FDEF;
 
 non terminal Object
@@ -81,6 +82,8 @@ non terminal Object
 	declr,
 	init_declr,
 	normal_declr,
+	dict_declr,
+	dict_body,
 	assignment,
 	type,
 	loc,
@@ -156,9 +159,12 @@ non terminal Object
 		| MAIN_RETURN
 		;
 
+	
+
 	declr ::= 
 		normal_declr SEMI
 		| init_declr SEMI
+		| dict_declr SEMI
 		;
 
 	init_declr ::= 
@@ -167,6 +173,16 @@ non terminal Object
 
 	normal_declr ::= 
 		ID COLON type
+		;
+
+	dict_declr ::=
+		ID COLON DICT_TYPE ASSIGN LCURL dict_body RCURL
+		;
+
+	dict_body ::=
+		loc COLON loc COMMA dict_body
+		| loc COLON loc
+		|
 		;
 
 	assignment ::= 
