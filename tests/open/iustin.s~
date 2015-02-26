@@ -1,18 +1,28 @@
-fdef maisan () {
-	a : char := '21';
-	rata : rat := 2;
-	while ( a+2) do
-		a : int := 0;
-		v := 10;
-	od
-	return 's';
+l : float := 3;
+l : float := 3;
+
+fdef sum(i:int, j:int) {
+	a := 2;
+     return;
 } : int;
 
+a : int;
+
+fdef sum(i:float, j:float) {
+	v:= T;
+     return i + j;
+} : float;
+
 main {
-	while ( a+10-(-3_2/4 + gh)) do
-		a : int := 0;
-		v := 10;
-	od
+
+  s1:int := sum(-10,20);
+  s2:float := sum(10.0,-20.0);
+  b:bool;
+
+  if (s1 < s2 || s1 = s2) then
+     b  :=  s1 + s2 / (s1 + s2) <= 30;
+	fi
+	
 }
 
 

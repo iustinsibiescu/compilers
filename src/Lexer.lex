@@ -44,6 +44,7 @@ id =[A-Za-z_][A-Za-z_0-9]*
 <YYINITIAL> {
 
 	"main"			{ return symbol(sym.MAIN); } 
+	"return;"		{ return symbol(sym.MAIN_RETURN); } 
 	"while"			{ return symbol(sym.WHILE); } 
 	"do"			{ return symbol(sym.DO); } 
 	"od"			{ return symbol(sym.OD); } 
@@ -56,6 +57,15 @@ id =[A-Za-z_][A-Za-z_0-9]*
 	"char"			{ return symbol(sym.CHARACTER_TYPE); }
 	"float"			{ return symbol(sym.FLOAT_TYPE); }
 	"int"			{ return symbol(sym.INTEGER_TYPE); }
+	"!="			{ return symbol(sym.NEQ); }
+	"="			{ return symbol(sym.EQ); }
+	">="			{ return symbol(sym.GTE); }
+	">"			{ return symbol(sym.GT); }
+	"<="			{ return symbol(sym.LTE); }
+	"<"			{ return symbol(sym.LT); }
+	"&&"			{ return symbol(sym.AND); }
+	"||"			{ return symbol(sym.OR); }
+	"!"			{ return symbol(sym.NOT); }
 	":="			{ return symbol(sym.ASSIGN);}
 	":"			{ return symbol(sym.COLON);}
 	","			{ return symbol(sym.COMMA); }

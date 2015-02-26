@@ -38,15 +38,6 @@ terminal
 	MINUS,
 	TIMES,
 	DIVIDE,
-	GT,
-	GTE,
-	LT,
-	LTE,
-	EQ,
-	NEQ,
-	AND,
-	OR,
-	NOT,
 	SEMI,
 	COLON,
 	ASSIGN,
@@ -62,7 +53,6 @@ terminal
 	RCURL,
 	COMMA,
 	RETURN,
-	RETURN_MAIN,
 	FDEF;
 
 non terminal Object
@@ -83,22 +73,14 @@ non terminal Object
 	normal_declr,
 	assignment,
 	type,
-	loc,
-	param_list,
-	bool,
-	join,
-	equality,
-	rel,
 	expr,
-	term,
-	unary,
 	factor,
+	term,
 	numerical_val;
 
 
 	program ::= 
 		function_body program
-		| declr program 
 		| main
 		;
 
@@ -112,7 +94,8 @@ non terminal Object
 		;
 
 	return_val ::= 
-		bool
+		expr
+		| CHARACTER_VALUE
 		;
 
 	function_declr ::= 
@@ -131,12 +114,12 @@ non terminal Object
 		;
 
 	whileblock ::= 
-		WHILE LPAREN bool RPAREN DO body OD
+		WHILE LPAREN expr RPAREN DO body OD
 		;
 
 	ifblock ::= 
-		IF LPAREN bool RPAREN THEN body ELSE body FI
-		| IF LPAREN bool RPAREN THEN body FI 
+		IF LPAREN expr RPAREN THEN body ELSE body FI
+		| IF LPAREN expr RPAREN THEN body FI 
 		; 
 
 	declrs ::= 
@@ -153,7 +136,6 @@ non terminal Object
 		ID assignment SEMI
 		| ifblock
 		| whileblock
-		| MAIN_RETURN
 		;
 
 	declr ::= 
@@ -170,7 +152,8 @@ non terminal Object
 		;
 
 	assignment ::= 
-		ASSIGN bool
+		ASSIGN expr
+		| ASSIGN CHARACTER_VALUE
 		;
 
 	type ::= 
@@ -182,23 +165,8 @@ non terminal Object
 		;
 
 
-
-
-	loc ::=
-		ID
-		| numerical_val
-		| BOOLEAN_VALUE
-		| CHARACTER_VALUE
-		| ID LPAREN param_list RPAREN
-		;	
-
-	param_list ::=
-		bool COMMA param_list
-		| bool
-		;
-
-	bool ::= 
-		bool OR join 
+	bool_expr ::= 
+		bool_expr OR join 
 		| join
 		;
 
@@ -208,42 +176,34 @@ non terminal Object
 		;
 
 	equality ::=
-		equality EQ rel
-		| equality NEQ rel
+		equality EQUALS rel
+		| equality NOT EQUALS rel
 		| rel
-		;
 
-	rel ::=
-		expr LT expr
-		| expr LTE expr
-		| expr GTE expr
-		| expr GT expr
-		| expr
-		;
+	rel ::= 
+		
+		
 
-	expr ::=
+
+	expr ::= 
 		expr PLUS term
 		| expr MINUS term
 		| term
 		;
-	
-	term ::=
-		term TIMES unary
-		| term DIVIDE unary
-		| unary
-		;
 
-	unary ::=
-		NOT unary
-		| MINUS unary
+	term ::= 
+		term TIMES factor
+		| term DIVIDE factor
 		| factor
+		| MINUS factor
 		;
 
-	factor ::=
-		LPAREN bool RPAREN
-		| loc
+	factor ::= 
+		LPAREN expr RPAREN
+		| numerical_val
+		| ID
 		;
-		
+
 	numerical_val ::= 
 		INTEGER_NUMBER
 		| FLOAT_NUMBER

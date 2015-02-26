@@ -38,6 +38,15 @@ terminal
 	MINUS,
 	TIMES,
 	DIVIDE,
+	GT,
+	GTE,
+	LT,
+	LTE,
+	EQ,
+	NEQ,
+	AND,
+	OR,
+	NOT,
 	SEMI,
 	COLON,
 	ASSIGN,
@@ -53,6 +62,7 @@ terminal
 	RCURL,
 	COMMA,
 	RETURN,
+	MAIN_RETURN,
 	FDEF;
 
 non terminal Object
@@ -73,14 +83,22 @@ non terminal Object
 	normal_declr,
 	assignment,
 	type,
+	loc,
+	param_list,
+	bool,
+	join,
+	equality,
+	rel,
 	expr,
-	factor,
 	term,
+	unary,
+	factor,
 	numerical_val;
 
 
 	program ::= 
 		function_body program
+		| declr program 
 		| main
 		;
 
@@ -94,8 +112,7 @@ non terminal Object
 		;
 
 	return_val ::= 
-		expr
-		| CHARACTER_VALUE
+		bool
 		;
 
 	function_declr ::= 
@@ -114,12 +131,12 @@ non terminal Object
 		;
 
 	whileblock ::= 
-		WHILE LPAREN expr RPAREN DO body OD
+		WHILE LPAREN bool RPAREN DO body OD
 		;
 
 	ifblock ::= 
-		IF LPAREN expr RPAREN THEN body ELSE body FI
-		| IF LPAREN expr RPAREN THEN body FI 
+		IF LPAREN bool RPAREN THEN body ELSE body FI
+		| IF LPAREN bool RPAREN THEN body FI 
 		; 
 
 	declrs ::= 
@@ -136,6 +153,7 @@ non terminal Object
 		ID assignment SEMI
 		| ifblock
 		| whileblock
+		| MAIN_RETURN
 		;
 
 	declr ::= 
@@ -152,8 +170,7 @@ non terminal Object
 		;
 
 	assignment ::= 
-		ASSIGN expr
-		| ASSIGN CHARACTER_VALUE
+		ASSIGN bool
 		;
 
 	type ::= 
@@ -164,25 +181,69 @@ non terminal Object
 		| CHARACTER_TYPE
 		;
 
-	expr ::= 
-		expr PLUS factor
-		| expr MINUS factor
+
+
+
+	loc ::=
+		ID
+		| numerical_val
+		| BOOLEAN_VALUE
+		| CHARACTER_VALUE
+		| ID LPAREN param_list RPAREN
+		;	
+
+	param_list ::=
+		bool COMMA param_list
+		| bool
+		;
+
+	bool ::= 
+		bool OR join 
+		| join
+		;
+
+	join ::= 
+		join AND equality
+		| equality
+		;
+
+	equality ::=
+		equality EQ rel
+		| equality NEQ rel
+		| rel
+		;
+
+	rel ::=
+		expr LT expr
+		| expr LTE expr
+		| expr GTE expr
+		| expr GT expr
+		| expr
+		;
+
+	expr ::=
+		expr PLUS term
+		| expr MINUS term
+		| term
+		;
+	
+	term ::=
+		term TIMES unary
+		| term DIVIDE unary
+		| unary
+		;
+
+	unary ::=
+		NOT unary
+		| MINUS unary
 		| factor
 		;
 
-	factor ::= 
-		factor TIMES term
-		| factor DIVIDE term
-		| term
-		| MINUS term
+	factor ::=
+		LPAREN bool RPAREN
+		| loc
 		;
-
-	term ::= 
-		LPAREN expr RPAREN
-		| numerical_val
-		| ID
-		;
-
+		
 	numerical_val ::= 
 		INTEGER_NUMBER
 		| FLOAT_NUMBER
