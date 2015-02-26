@@ -28,10 +28,13 @@ terminal
 	RATIONAL_TYPE,
 	FLOAT_TYPE,
 	DICT_TYPE,
+	SEQ_TYPE,
 	BOOLEAN_VALUE,
 	CHARACTER_VALUE,
 	INTEGER_NUMBER,
 	FLOAT_NUMBER,
+	DICT_VALUE,
+	SEQ_VALUE,
 	RATIONAL_NUMBER,
 	LPAREN,
 	RPAREN,
@@ -59,6 +62,8 @@ terminal
 	DO,
 	OD,
 	MAIN,
+	LBRACKET,
+	RBRACKET,
 	LCURL,
 	RCURL,
 	COMMA,
@@ -84,6 +89,8 @@ non terminal Object
 	normal_declr,
 	dict_declr,
 	dict_body,
+	seq_declr,
+	seq_body,
 	assignment,
 	type,
 	loc,
@@ -154,6 +161,8 @@ non terminal Object
 
 	stmt ::= 
 		ID assignment SEMI
+		| ID LPAREN param_list RPAREN SEMI
+		| ID LBRACKET loc RBRACKET SEMI
 		| ifblock
 		| whileblock
 		| MAIN_RETURN
@@ -165,6 +174,7 @@ non terminal Object
 		normal_declr SEMI
 		| init_declr SEMI
 		| dict_declr SEMI
+		| seq_declr SEMI
 		;
 
 	init_declr ::= 
@@ -177,11 +187,23 @@ non terminal Object
 
 	dict_declr ::=
 		ID COLON DICT_TYPE ASSIGN LCURL dict_body RCURL
+		| ID COLON DICT_TYPE
 		;
 
 	dict_body ::=
 		loc COLON loc COMMA dict_body
 		| loc COLON loc
+		|
+		;
+
+	seq_declr ::=
+		ID COLON SEQ_TYPE ASSIGN LBRACKET seq_body RBRACKET
+		| ID COLON SEQ_TYPE
+		;
+
+	seq_body ::=
+		loc COMMA seq_body
+		| loc 
 		|
 		;
 
@@ -206,6 +228,7 @@ non terminal Object
 		| BOOLEAN_VALUE
 		| CHARACTER_VALUE
 		| ID LPAREN param_list RPAREN
+		| ID LBRACKET loc RBRACKET 
 		;	
 
 	param_list ::=

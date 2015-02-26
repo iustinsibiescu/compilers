@@ -6,51 +6,56 @@
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int DIVIDE = 19;
-  public static final int MAIN_RETURN = 44;
-  public static final int LTE = 23;
-  public static final int LPAREN = 14;
-  public static final int SEMI = 29;
-  public static final int MINUS = 17;
-  public static final int RPAREN = 15;
-  public static final int LCURL = 40;
-  public static final int NOT = 28;
-  public static final int AND = 26;
-  public static final int LT = 22;
-  public static final int OR = 27;
-  public static final int COMMA = 42;
-  public static final int FI = 33;
-  public static final int FLOAT_NUMBER = 12;
-  public static final int PLUS = 16;
-  public static final int MAIN = 39;
-  public static final int ASSIGN = 31;
-  public static final int IF = 32;
+  public static final int DIVIDE = 22;
+  public static final int MAIN_RETURN = 49;
+  public static final int LTE = 26;
+  public static final int LBRACKET = 43;
+  public static final int LPAREN = 17;
+  public static final int SEMI = 32;
+  public static final int MINUS = 20;
+  public static final int RPAREN = 18;
+  public static final int LCURL = 45;
+  public static final int NOT = 31;
+  public static final int AND = 29;
+  public static final int LT = 25;
+  public static final int OR = 30;
+  public static final int COMMA = 47;
+  public static final int FI = 36;
+  public static final int FLOAT_NUMBER = 13;
+  public static final int PLUS = 19;
+  public static final int MAIN = 42;
+  public static final int IF = 35;
+  public static final int ASSIGN = 34;
   public static final int ID = 2;
   public static final int EOF = 0;
-  public static final int RETURN = 43;
-  public static final int OD = 38;
+  public static final int RETURN = 48;
+  public static final int OD = 41;
+  public static final int RBRACKET = 44;
   public static final int error = 1;
   public static final int DICT_TYPE = 8;
-  public static final int NEQ = 25;
-  public static final int FDEF = 45;
+  public static final int DICT_VALUE = 14;
+  public static final int NEQ = 28;
+  public static final int FDEF = 50;
   public static final int INTEGER_TYPE = 5;
-  public static final int EQ = 24;
+  public static final int EQ = 27;
   public static final int CHARACTER_TYPE = 4;
-  public static final int GTE = 21;
-  public static final int RCURL = 41;
-  public static final int INTEGER_NUMBER = 11;
-  public static final int TIMES = 18;
-  public static final int BOOLEAN_VALUE = 9;
-  public static final int COLON = 30;
-  public static final int ELSE = 35;
-  public static final int WHILE = 36;
-  public static final int THEN = 34;
+  public static final int GTE = 24;
+  public static final int RCURL = 46;
+  public static final int INTEGER_NUMBER = 12;
+  public static final int TIMES = 21;
+  public static final int BOOLEAN_VALUE = 10;
+  public static final int COLON = 33;
+  public static final int ELSE = 38;
+  public static final int WHILE = 39;
+  public static final int SEQ_TYPE = 9;
+  public static final int THEN = 37;
   public static final int RATIONAL_TYPE = 6;
-  public static final int CHARACTER_VALUE = 10;
-  public static final int RATIONAL_NUMBER = 13;
-  public static final int GT = 20;
+  public static final int CHARACTER_VALUE = 11;
+  public static final int SEQ_VALUE = 15;
+  public static final int RATIONAL_NUMBER = 16;
+  public static final int GT = 23;
   public static final int FLOAT_TYPE = 7;
-  public static final int DO = 37;
+  public static final int DO = 40;
   public static final int BOOLEAN_TYPE = 3;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -62,10 +67,13 @@ public class sym {
   "RATIONAL_TYPE",
   "FLOAT_TYPE",
   "DICT_TYPE",
+  "SEQ_TYPE",
   "BOOLEAN_VALUE",
   "CHARACTER_VALUE",
   "INTEGER_NUMBER",
   "FLOAT_NUMBER",
+  "DICT_VALUE",
+  "SEQ_VALUE",
   "RATIONAL_NUMBER",
   "LPAREN",
   "RPAREN",
@@ -93,6 +101,8 @@ public class sym {
   "DO",
   "OD",
   "MAIN",
+  "LBRACKET",
+  "RBRACKET",
   "LCURL",
   "RCURL",
   "COMMA",

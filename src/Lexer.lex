@@ -33,18 +33,31 @@ boolean =T|F
 character ='([A-Za-z]|[0-9]|[!-~])'
 
 integer =0|[1-9][0-9]*
+
+rational = {integer}_{integer}\/{integer}
    
 float =0\.[0-9]+|[1-9][0-9]*\.[0-9]+
 
 id =[A-Za-z_][A-Za-z_0-9]*
 
-dict =dict<[A-Za-z_][A-Za-z_0-9]*,[A-Za-z_][A-Za-z_0-9]*>
+val ={integer}|{rational}|{float}|{boolean}|{character}|{id}
+
+dict_type =dict<[A-Za-z_][A-Za-z_0-9]*,[A-Za-z_][A-Za-z_0-9]*>
+
+dict_value =\{\}|\{({val}:{val},)*({val}:{val})\}
+
+seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
+
+seq_value =\[\]|\[({val},)*({val})\]
 
 %%
 
    
 <YYINITIAL> {
-	{dict}			{ return symbol(sym.DICT_TYPE); }
+	{dict_type}		{ return symbol(sym.DICT_TYPE); }
+	{seq_type}		{ return symbol(sym.SEQ_TYPE); }
+	{dict_value}		{ return symbol(sym.DICT_VALUE); }
+	{seq_value}		{ return symbol(sym.SEQ_VALUE); }
 	"main"			{ return symbol(sym.MAIN); } 
 	"return;"		{ return symbol(sym.MAIN_RETURN); } 
 	"while"			{ return symbol(sym.WHILE); } 
@@ -78,6 +91,8 @@ dict =dict<[A-Za-z_][A-Za-z_0-9]*,[A-Za-z_][A-Za-z_0-9]*>
 	"/"			{ return symbol(sym.DIVIDE); }
 	"("			{ return symbol(sym.LPAREN); }
 	")"			{ return symbol(sym.RPAREN); }
+	"["			{ return symbol(sym.LBRACKET); }
+	"]"			{ return symbol(sym.RBRACKET); }
 	"{"			{ return symbol(sym.LCURL); }
 	"}"			{ return symbol(sym.RCURL); }
 
@@ -88,7 +103,7 @@ dict =dict<[A-Za-z_][A-Za-z_0-9]*,[A-Za-z_][A-Za-z_0-9]*>
 	{boolean}		{ return symbol(sym.BOOLEAN_VALUE); }
 	{character}		{ return symbol(sym.CHARACTER_VALUE); }
 	{integer}		{ return symbol(sym.INTEGER_NUMBER); }
-	{integer}_{integer}\/{integer}		{ return symbol(sym.RATIONAL_NUMBER); }
+	{rational}		{ return symbol(sym.RATIONAL_NUMBER); }
 	{float}			{ return symbol(sym.FLOAT_NUMBER); }
 
 	{id}			{ return symbol(sym.ID); }
