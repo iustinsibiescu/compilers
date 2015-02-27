@@ -61,7 +61,10 @@ terminal
 	WHILE,
 	DO,
 	OD,
+	FORALL,
 	IN,
+	READ,
+	PRINT,
 	MAIN,
 	LBRACKET,
 	RBRACKET,
@@ -80,8 +83,9 @@ non terminal Object
 	formal_param_list,
 	main,
 	body,
-	whileblock,
-	ifblock,
+	while_block,
+	if_block,
+	forall_block,
 	declrs,
 	stmts,
 	stmt,
@@ -101,6 +105,7 @@ non terminal Object
 	loc,
 	array_element,
 	in_block,
+	iterable,
 	function_call,
 	param_list,
 	bool,
@@ -149,14 +154,18 @@ non terminal Object
 		| stmts
 		;
 
-	whileblock ::= 
+	while_block ::= 
 		WHILE LPAREN bool RPAREN DO body OD
 		;
 
-	ifblock ::= 
+	if_block ::= 
 		IF LPAREN bool RPAREN THEN body ELSE body FI
 		| IF LPAREN bool RPAREN THEN body FI 
 		; 
+
+	forall_block ::=
+		FORALL LPAREN in_block RPAREN DO body OD
+		;
 
 	declrs ::= 
 		declrs declr
@@ -173,9 +182,13 @@ non terminal Object
 		ID assignment SEMI
 		| function_call SEMI
 		| array_element SEMI
-		| ifblock
-		| whileblock
+		| if_block
+		| while_block
+		| forall_block
 		| MAIN_RETURN
+		| READ ID SEMI
+		| READ array_element SEMI
+		| PRINT bool SEMI
 		;
 
 	
@@ -275,10 +288,14 @@ non terminal Object
 	
 
 	in_block ::= 
-		bool IN dict_value
-		| bool IN seq_value
-		| bool IN ID
-		| bool IN array_element
+		bool IN iterable
+		;
+
+	iterable ::=
+		dict_value
+		| seq_value
+		| array_element
+		| ID
 		;
 				
 	

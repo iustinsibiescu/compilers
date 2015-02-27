@@ -48,6 +48,10 @@ dict_value =\{\}|\{({val}:{val},)*({val}:{val})\}
 
 seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
 
+line_comment =#.*\n
+
+comment =\/#(.|{LineTerminator})*#\/
+
 %%
 
    
@@ -70,7 +74,10 @@ seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
 	"char"			{ return symbol(sym.CHARACTER_TYPE); }
 	"float"			{ return symbol(sym.FLOAT_TYPE); }
 	"int"			{ return symbol(sym.INTEGER_TYPE); }
+	"forall"		{ return symbol(sym.FORALL); }
 	"in"			{ return symbol(sym.IN); }
+	"read"			{ return symbol(sym.READ); }
+	"print"			{ return symbol(sym.PRINT); }
 	"!="			{ return symbol(sym.NEQ); }
 	"="			{ return symbol(sym.EQ); }
 	">="			{ return symbol(sym.GTE); }
@@ -107,7 +114,8 @@ seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
 
 	{id}			{ return symbol(sym.ID); }
 	
-	
+	{line_comment}		{  }
+	{comment}		{  }
 	{WhiteSpace}		{  }   
 }
 
