@@ -16,7 +16,7 @@ main {
 		 b  :=  s1 + s2 / (s1 + s2) <= 30;
 	od
 	/#read a;
-	print a;#/
+	#print a;#/
 #
 #
 #

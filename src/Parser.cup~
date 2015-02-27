@@ -188,6 +188,7 @@ non terminal Object
 		| MAIN_RETURN
 		| READ ID SEMI
 		| READ array_element SEMI
+		| PRINT bool SEMI
 		;
 
 	

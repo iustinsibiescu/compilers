@@ -146,7 +146,7 @@ non terminal Object
 		;
 
 	main ::= 
-		MAIN LCURL body RCURL
+		MAIN LCURL body RCURL SEMI
 		;
 
 	body ::= 

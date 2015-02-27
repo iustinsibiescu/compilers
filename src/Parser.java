@@ -31,7 +31,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\004\000\002\002\004\000\002\002\003\000\002\003\015" +
     "\000\002\003\012\000\002\004\005\000\002\005\003\000" +
     "\002\006\005\000\002\006\003\000\002\006\002\000\002" +
-    "\007\006\000\002\010\004\000\002\010\003\000\002\011" +
+    "\007\007\000\002\010\004\000\002\010\003\000\002\011" +
     "\011\000\002\012\013\000\002\012\011\000\002\013\011" +
     "\000\002\014\004\000\002\014\003\000\002\015\004\000" +
     "\002\015\003\000\002\016\005\000\002\016\004\000\002" +
@@ -69,8 +69,8 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\333\000\010\004\012\060\005\070\010\001\002\000" +
-    "\004\042\335\001\002\000\004\063\332\001\002\000\010" +
+    "\000\334\000\010\004\012\060\005\070\010\001\002\000" +
+    "\004\042\336\001\002\000\004\063\332\001\002\000\010" +
     "\002\ufffd\004\012\070\010\001\002\000\004\002\330\001" +
     "\002\000\004\004\222\001\002\000\006\042\216\044\220" +
     "\001\002\000\004\043\026\001\002\000\004\042\025\001" +
@@ -372,10 +372,10 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\007\033\010\031\011\035\001\002\000\004\002\000\001" +
     "\002\000\010\002\ufffe\004\012\070\010\001\002\000\022" +
     "\004\243\045\241\051\237\054\235\056\234\057\247\067" +
-    "\251\070\010\001\002\000\004\064\334\001\002\000\010" +
-    "\002\ufff5\004\ufff5\070\ufff5\001\002\000\026\002\uffdd\004" +
-    "\uffdd\045\uffdd\051\uffdd\054\uffdd\056\uffdd\057\uffdd\060\uffdd" +
-    "\067\uffdd\070\uffdd\001\002" });
+    "\251\070\010\001\002\000\004\064\334\001\002\000\004" +
+    "\042\335\001\002\000\010\002\ufff5\004\ufff5\070\ufff5\001" +
+    "\002\000\026\002\uffdd\004\uffdd\045\uffdd\051\uffdd\054\uffdd" +
+    "\056\uffdd\057\uffdd\060\uffdd\067\uffdd\070\uffdd\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -383,7 +383,7 @@ public class Parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\333\000\024\002\006\003\012\007\005\014\014\017" +
+    "\000\334\000\024\002\006\003\012\007\005\014\014\017" +
     "\016\020\015\021\010\022\013\025\003\001\001\000\002" +
     "\001\001\000\002\001\001\000\020\003\012\014\330\017" +
     "\016\020\015\021\010\022\013\025\003\001\001\000\002" +
@@ -529,7 +529,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\235\012\247\013\232\014\241\015\245\016\251\017\016" +
     "\020\015\021\010\022\013\025\003\035\244\040\237\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "" });
+    "\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -723,11 +723,11 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // main ::= MAIN LCURL body RCURL 
+          case 12: // main ::= MAIN LCURL body RCURL SEMI 
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("main",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("main",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
