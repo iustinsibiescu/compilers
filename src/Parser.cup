@@ -73,10 +73,10 @@ terminal
 
 non terminal Object
 	program,
-	function_body,
+	function_declr,
 	return,
 	return_val,
-	function_declr,
+	formal_param_list,
 	main,
 	body,
 	whileblock,
@@ -90,7 +90,10 @@ non terminal Object
 	dict_declr,
 	dict_body,
 	seq_declr,
-	seq_body,
+	seq_value,
+	seq_elements,
+	slicing,
+	slicing_index,
 	assignment,
 	type,
 	loc,
@@ -107,14 +110,15 @@ non terminal Object
 
 
 	program ::= 
-		function_body program
-		| declr program 
+		declrs main declrs
+		| declrs main
+		| main declrs
 		| main
 		;
 
-	function_body ::= 
-		FDEF ID LPAREN function_declr RPAREN LCURL body return RCURL COLON type SEMI
-		| FDEF ID LPAREN function_declr RPAREN LCURL body RCURL SEMI
+	function_declr ::= 
+		FDEF ID LPAREN formal_param_list RPAREN LCURL body return RCURL COLON type
+		| FDEF ID LPAREN formal_param_list RPAREN LCURL body RCURL
 		;
 
 	return ::= 
@@ -125,8 +129,8 @@ non terminal Object
 		bool
 		;
 
-	function_declr ::= 
-		normal_declr COMMA function_declr
+	formal_param_list ::= 
+		normal_declr COMMA formal_param_list
 		| normal_declr
 		|
 		;
@@ -152,6 +156,7 @@ non terminal Object
 	declrs ::= 
 		declrs declr
 		| declr
+		
 		;
 
 	stmts ::= 
@@ -175,14 +180,15 @@ non terminal Object
 		| init_declr SEMI
 		| dict_declr SEMI
 		| seq_declr SEMI
-		;
-
-	init_declr ::= 
-		normal_declr assignment
+		| function_declr SEMI
 		;
 
 	normal_declr ::= 
 		ID COLON type
+		;
+
+	init_declr ::= 
+		normal_declr assignment
 		;
 
 	dict_declr ::=
@@ -197,15 +203,38 @@ non terminal Object
 		;
 
 	seq_declr ::=
-		ID COLON SEQ_TYPE ASSIGN LBRACKET seq_body RBRACKET
+		ID COLON SEQ_TYPE ASSIGN seq_value
 		| ID COLON SEQ_TYPE
 		;
 
-	seq_body ::=
-		loc COMMA seq_body
-		| loc 
+	seq_value ::=
+		LBRACKET seq_elements RBRACKET
+		| slicing
+		;
+
+
+	seq_elements ::= 
+		bool COMMA seq_elements
+		| bool
+		| LBRACKET seq_elements RBRACKET COMMA seq_elements
+		| LBRACKET seq_elements RBRACKET
+		| slicing COMMA seq_elements
+		| slicing
 		|
 		;
+
+	slicing ::=
+		ID LBRACKET slicing_index COLON slicing_index RBRACKET 
+		| ID LBRACKET COLON slicing_index RBRACKET 
+		| ID LBRACKET slicing_index COLON RBRACKET
+		;
+
+	slicing_index ::=
+		ID
+		| INTEGER_NUMBER
+		| ID LPAREN param_list RPAREN
+		;
+
 
 	assignment ::= 
 		ASSIGN bool
@@ -231,11 +260,12 @@ non terminal Object
 		| SEQ_VALUE
 		| ID LPAREN param_list RPAREN
 		| ID LBRACKET loc RBRACKET 
-		;	
+		;
 
 	param_list ::=
 		bool COMMA param_list
 		| bool
+		
 		;
 
 	bool ::= 
