@@ -4,6 +4,8 @@ main {
   s2:float := sum(10.0,-20.0);
   b:bool;
    a : seq<top> := [isd[1:v],[]];
+	a : seq<top> := "asdaf   "      dsf
+\n";
 
 	f(a);
 	#
@@ -23,7 +25,7 @@ main {
 #
 
 	
-}
+};
 
 
 

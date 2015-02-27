@@ -48,6 +48,8 @@ dict_value =\{\}|\{({val}:{val},)*({val}:{val})\}
 
 seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
 
+string =\"([A-Za-z]|[0-9]|[#-~]|[ -!]|\r|\n|\r\n)*\"
+
 line_comment =#.*\n
 
 comment =\/#(.|{LineTerminator})*#\/
@@ -59,6 +61,7 @@ comment =\/#(.|{LineTerminator})*#\/
 	{dict_type}		{ return symbol(sym.DICT_TYPE); }
 	{seq_type}		{ return symbol(sym.SEQ_TYPE); }
 	{dict_value}		{ return symbol(sym.DICT_VALUE); }
+	{string}		{ return symbol(sym.STRING_VALUE); }
 
 	"main"			{ return symbol(sym.MAIN); } 
 	"return;"		{ return symbol(sym.MAIN_RETURN); } 

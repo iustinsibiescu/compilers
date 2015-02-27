@@ -36,6 +36,7 @@ terminal
 	DICT_VALUE,
 	SEQ_VALUE,
 	RATIONAL_NUMBER,
+	STRING_VALUE,
 	LPAREN,
 	RPAREN,
 	PLUS,
@@ -180,6 +181,7 @@ non terminal Object
 
 	stmt ::= 
 		ID assignment SEMI
+		| ID ASSIGN STRING_VALUE SEMI
 		| function_call SEMI
 		| array_element SEMI
 		| if_block
@@ -232,6 +234,7 @@ non terminal Object
 	seq_value ::=
 		LBRACKET seq_elements RBRACKET
 		| slicing
+		| STRING_VALUE
 		;
 
 
