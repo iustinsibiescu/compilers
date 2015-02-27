@@ -55,13 +55,13 @@ class Lexer implements java_cup.runtime.Scanner {
     "\1\0\1\1\2\2\1\3\1\1\1\4\2\5\1\6"+
     "\4\4\1\7\1\10\1\11\1\12\1\13\1\14\4\4"+
     "\1\15\4\4\1\16\1\17\2\1\1\20\1\21\1\22"+
-    "\1\23\1\24\1\25\1\26\3\0\1\4\1\27\1\4"+
-    "\1\30\2\4\1\31\1\32\4\0\1\33\1\34\6\4"+
-    "\1\35\1\4\1\36\2\4\1\37\1\40\1\41\1\42"+
-    "\2\0\1\43\1\4\1\44\2\4\4\0\4\4\1\45"+
-    "\4\4\1\0\1\4\1\46\1\47\11\0\1\50\1\51"+
-    "\2\4\1\52\1\4\1\53\2\54\7\0\1\4\1\55"+
-    "\1\56\5\0\1\57\1\60\2\0\1\61\1\0\1\62";
+    "\1\23\1\24\1\25\1\26\3\0\1\4\1\27\1\30"+
+    "\1\31\2\4\1\32\1\33\4\0\1\34\1\35\6\4"+
+    "\1\36\1\4\1\37\2\4\1\40\1\41\1\42\1\43"+
+    "\2\0\1\44\1\4\1\45\2\4\4\0\4\4\1\46"+
+    "\4\4\1\0\1\4\1\47\1\50\11\0\1\51\1\52"+
+    "\2\4\1\53\1\4\1\54\2\55\7\0\1\4\1\56"+
+    "\1\57\5\0\1\60\1\61\2\0\1\62\1\0\1\63";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[136];
@@ -764,203 +764,207 @@ class Lexer implements java_cup.runtime.Scanner {
         case 1: 
           { throw new Error("Illegal character <"+yytext()+">");
           }
-        case 51: break;
+        case 52: break;
         case 2: 
           { 
           }
-        case 52: break;
+        case 53: break;
         case 3: 
           { return symbol(sym.BOOLEAN_VALUE);
           }
-        case 53: break;
+        case 54: break;
         case 4: 
           { return symbol(sym.ID);
           }
-        case 54: break;
+        case 55: break;
         case 5: 
           { return symbol(sym.INTEGER_NUMBER);
           }
-        case 55: break;
+        case 56: break;
         case 6: 
           { return symbol(sym.DIVIDE);
           }
-        case 56: break;
+        case 57: break;
         case 7: 
           { return symbol(sym.LT);
           }
-        case 57: break;
+        case 58: break;
         case 8: 
           { return symbol(sym.COMMA);
           }
-        case 58: break;
+        case 59: break;
         case 9: 
           { return symbol(sym.GT);
           }
-        case 59: break;
+        case 60: break;
         case 10: 
           { return symbol(sym.LCURL);
           }
-        case 60: break;
+        case 61: break;
         case 11: 
           { return symbol(sym.RCURL);
           }
-        case 61: break;
+        case 62: break;
         case 12: 
           { return symbol(sym.COLON);
           }
-        case 62: break;
+        case 63: break;
         case 13: 
           { return symbol(sym.SEMI);
           }
-        case 63: break;
+        case 64: break;
         case 14: 
           { return symbol(sym.NOT);
           }
-        case 64: break;
+        case 65: break;
         case 15: 
           { return symbol(sym.EQ);
           }
-        case 65: break;
+        case 66: break;
         case 16: 
           { return symbol(sym.PLUS);
           }
-        case 66: break;
+        case 67: break;
         case 17: 
           { return symbol(sym.MINUS);
           }
-        case 67: break;
+        case 68: break;
         case 18: 
           { return symbol(sym.TIMES);
           }
-        case 68: break;
+        case 69: break;
         case 19: 
           { return symbol(sym.LPAREN);
           }
-        case 69: break;
+        case 70: break;
         case 20: 
           { return symbol(sym.RPAREN);
           }
-        case 70: break;
+        case 71: break;
         case 21: 
           { return symbol(sym.LBRACKET);
           }
-        case 71: break;
+        case 72: break;
         case 22: 
           { return symbol(sym.RBRACKET);
           }
-        case 72: break;
+        case 73: break;
         case 23: 
           { return symbol(sym.DO);
           }
-        case 73: break;
-        case 24: 
-          { return symbol(sym.IF);
-          }
         case 74: break;
-        case 25: 
-          { return symbol(sym.LTE);
+        case 24: 
+          { return symbol(sym.IN);
           }
         case 75: break;
-        case 26: 
-          { return symbol(sym.GTE);
+        case 25: 
+          { return symbol(sym.IF);
           }
         case 76: break;
-        case 27: 
-          { return symbol(sym.DICT_VALUE);
+        case 26: 
+          { return symbol(sym.LTE);
           }
         case 77: break;
-        case 28: 
-          { return symbol(sym.ASSIGN);
+        case 27: 
+          { return symbol(sym.GTE);
           }
         case 78: break;
-        case 29: 
-          { return symbol(sym.OD);
+        case 28: 
+          { return symbol(sym.DICT_VALUE);
           }
         case 79: break;
-        case 30: 
-          { return symbol(sym.FI);
+        case 29: 
+          { return symbol(sym.ASSIGN);
           }
         case 80: break;
-        case 31: 
-          { return symbol(sym.NEQ);
+        case 30: 
+          { return symbol(sym.OD);
           }
         case 81: break;
-        case 32: 
-          { return symbol(sym.AND);
+        case 31: 
+          { return symbol(sym.FI);
           }
         case 82: break;
-        case 33: 
-          { return symbol(sym.OR);
+        case 32: 
+          { return symbol(sym.NEQ);
           }
         case 83: break;
-        case 34: 
-          { return symbol(sym.CHARACTER_VALUE);
+        case 33: 
+          { return symbol(sym.AND);
           }
         case 84: break;
-        case 35: 
-          { return symbol(sym.FLOAT_NUMBER);
+        case 34: 
+          { return symbol(sym.OR);
           }
         case 85: break;
-        case 36: 
-          { return symbol(sym.INTEGER_TYPE);
+        case 35: 
+          { return symbol(sym.CHARACTER_VALUE);
           }
         case 86: break;
-        case 37: 
-          { return symbol(sym.RATIONAL_TYPE);
+        case 36: 
+          { return symbol(sym.FLOAT_NUMBER);
           }
         case 87: break;
-        case 38: 
-          { return symbol(sym.CHARACTER_TYPE);
+        case 37: 
+          { return symbol(sym.INTEGER_TYPE);
           }
         case 88: break;
-        case 39: 
-          { return symbol(sym.THEN);
+        case 38: 
+          { return symbol(sym.RATIONAL_TYPE);
           }
         case 89: break;
-        case 40: 
-          { return symbol(sym.ELSE);
+        case 39: 
+          { return symbol(sym.CHARACTER_TYPE);
           }
         case 90: break;
-        case 41: 
-          { return symbol(sym.MAIN);
+        case 40: 
+          { return symbol(sym.THEN);
           }
         case 91: break;
-        case 42: 
-          { return symbol(sym.FDEF);
+        case 41: 
+          { return symbol(sym.ELSE);
           }
         case 92: break;
-        case 43: 
-          { return symbol(sym.BOOLEAN_TYPE);
+        case 42: 
+          { return symbol(sym.MAIN);
           }
         case 93: break;
-        case 44: 
-          { return symbol(sym.RATIONAL_NUMBER);
+        case 43: 
+          { return symbol(sym.FDEF);
           }
         case 94: break;
-        case 45: 
-          { return symbol(sym.WHILE);
+        case 44: 
+          { return symbol(sym.BOOLEAN_TYPE);
           }
         case 95: break;
-        case 46: 
-          { return symbol(sym.FLOAT_TYPE);
+        case 45: 
+          { return symbol(sym.RATIONAL_NUMBER);
           }
         case 96: break;
-        case 47: 
-          { return symbol(sym.SEQ_TYPE);
+        case 46: 
+          { return symbol(sym.WHILE);
           }
         case 97: break;
-        case 48: 
-          { return symbol(sym.RETURN);
+        case 47: 
+          { return symbol(sym.FLOAT_TYPE);
           }
         case 98: break;
-        case 49: 
-          { return symbol(sym.MAIN_RETURN);
+        case 48: 
+          { return symbol(sym.SEQ_TYPE);
           }
         case 99: break;
-        case 50: 
-          { return symbol(sym.DICT_TYPE);
+        case 49: 
+          { return symbol(sym.RETURN);
           }
         case 100: break;
+        case 50: 
+          { return symbol(sym.MAIN_RETURN);
+          }
+        case 101: break;
+        case 51: 
+          { return symbol(sym.DICT_TYPE);
+          }
+        case 102: break;
         default: 
           if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
             zzAtEOF = true;

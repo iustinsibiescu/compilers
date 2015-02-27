@@ -61,6 +61,7 @@ terminal
 	WHILE,
 	DO,
 	OD,
+	IN,
 	MAIN,
 	LBRACKET,
 	RBRACKET,
@@ -88,6 +89,7 @@ non terminal Object
 	init_declr,
 	normal_declr,
 	dict_declr,
+	dict_value,
 	dict_body,
 	seq_declr,
 	seq_value,
@@ -97,6 +99,8 @@ non terminal Object
 	assignment,
 	type,
 	loc,
+	in_block,
+	function_call,
 	param_list,
 	bool,
 	join,
@@ -166,8 +170,8 @@ non terminal Object
 
 	stmt ::= 
 		ID assignment SEMI
-		| ID LPAREN param_list RPAREN SEMI
-		| ID LBRACKET loc RBRACKET SEMI
+		| function_call SEMI
+		| array_element SEMI
 		| ifblock
 		| whileblock
 		| MAIN_RETURN
@@ -192,8 +196,12 @@ non terminal Object
 		;
 
 	dict_declr ::=
-		ID COLON DICT_TYPE ASSIGN LCURL dict_body RCURL
+		ID COLON DICT_TYPE ASSIGN dict_value
 		| ID COLON DICT_TYPE
+		;
+
+	dict_value ::=
+		LCURL dict_body RCURL
 		;
 
 	dict_body ::=
@@ -232,7 +240,7 @@ non terminal Object
 	slicing_index ::=
 		ID
 		| INTEGER_NUMBER
-		| ID LPAREN param_list RPAREN
+		| function_call
 		;
 
 
@@ -248,29 +256,44 @@ non terminal Object
 		| CHARACTER_TYPE
 		;
 
-
-
-
 	loc ::=
 		ID
 		| numerical_val
 		| BOOLEAN_VALUE
+		
 		| CHARACTER_VALUE
 		| DICT_VALUE
 		| SEQ_VALUE
-		| ID LPAREN param_list RPAREN
-		| ID LBRACKET loc RBRACKET 
+		| function_call
+		| array_element 
+		;
+
+	array_element ::=
+		ID LBRACKET loc RBRACKET
+		;
+	
+
+	in_block ::= 
+		bool IN dict_value
+		| bool IN seq_value
+		| bool IN ID
+		| bool IN array_element
+		;
+				
+	
+	function_call ::=
+		ID LPAREN param_list RPAREN	
 		;
 
 	param_list ::=
 		bool COMMA param_list
 		| bool
-		
 		;
 
 	bool ::= 
 		bool OR join 
 		| join
+		| in_block
 		;
 
 	join ::= 

@@ -48,8 +48,6 @@ dict_value =\{\}|\{({val}:{val},)*({val}:{val})\}
 
 seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
 
-seq_value =\,{val}
-
 %%
 
    
@@ -57,7 +55,7 @@ seq_value =\,{val}
 	{dict_type}		{ return symbol(sym.DICT_TYPE); }
 	{seq_type}		{ return symbol(sym.SEQ_TYPE); }
 	{dict_value}		{ return symbol(sym.DICT_VALUE); }
-	{seq_value}		{ return symbol(sym.SEQ_VALUE); }
+
 	"main"			{ return symbol(sym.MAIN); } 
 	"return;"		{ return symbol(sym.MAIN_RETURN); } 
 	"while"			{ return symbol(sym.WHILE); } 

@@ -7,7 +7,7 @@ main {
 
 	f(a);
 	
-  if (s1 < s2 || s1 = s2) then
+  if (s in cacat[2]) then
      b  :=  s1 + s2 / (s1 + s2) <= 30;
 	fi
 	

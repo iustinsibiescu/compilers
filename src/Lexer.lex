@@ -70,6 +70,7 @@ seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
 	"char"			{ return symbol(sym.CHARACTER_TYPE); }
 	"float"			{ return symbol(sym.FLOAT_TYPE); }
 	"int"			{ return symbol(sym.INTEGER_TYPE); }
+	"in"			{ return symbol(sym.IN); }
 	"!="			{ return symbol(sym.NEQ); }
 	"="			{ return symbol(sym.EQ); }
 	">="			{ return symbol(sym.GTE); }

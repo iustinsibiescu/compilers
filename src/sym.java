@@ -7,40 +7,41 @@
 public class sym {
   /* terminals */
   public static final int DIVIDE = 22;
-  public static final int MAIN_RETURN = 49;
+  public static final int MAIN_RETURN = 50;
   public static final int LTE = 26;
-  public static final int LBRACKET = 43;
+  public static final int LBRACKET = 44;
   public static final int LPAREN = 17;
   public static final int SEMI = 32;
   public static final int MINUS = 20;
   public static final int RPAREN = 18;
-  public static final int LCURL = 45;
+  public static final int LCURL = 46;
   public static final int NOT = 31;
   public static final int AND = 29;
   public static final int LT = 25;
+  public static final int IN = 42;
   public static final int OR = 30;
-  public static final int COMMA = 47;
+  public static final int COMMA = 48;
   public static final int FI = 36;
   public static final int FLOAT_NUMBER = 13;
   public static final int PLUS = 19;
-  public static final int MAIN = 42;
+  public static final int MAIN = 43;
   public static final int IF = 35;
   public static final int ASSIGN = 34;
   public static final int ID = 2;
   public static final int EOF = 0;
-  public static final int RETURN = 48;
+  public static final int RETURN = 49;
   public static final int OD = 41;
-  public static final int RBRACKET = 44;
+  public static final int RBRACKET = 45;
   public static final int error = 1;
   public static final int DICT_TYPE = 8;
   public static final int DICT_VALUE = 14;
   public static final int NEQ = 28;
-  public static final int FDEF = 50;
+  public static final int FDEF = 51;
   public static final int INTEGER_TYPE = 5;
   public static final int EQ = 27;
   public static final int CHARACTER_TYPE = 4;
   public static final int GTE = 24;
-  public static final int RCURL = 46;
+  public static final int RCURL = 47;
   public static final int INTEGER_NUMBER = 12;
   public static final int TIMES = 21;
   public static final int BOOLEAN_VALUE = 10;
@@ -100,6 +101,7 @@ public class sym {
   "WHILE",
   "DO",
   "OD",
+  "IN",
   "MAIN",
   "LBRACKET",
   "RBRACKET",
