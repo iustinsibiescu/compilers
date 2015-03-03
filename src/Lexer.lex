@@ -40,8 +40,6 @@ float =0\.[0-9]+|[1-9][0-9]*\.[0-9]+
 
 id =[A-Za-z_][A-Za-z_0-9]*
 
-val ={integer}|{rational}|{float}|{boolean}|{character}|{id}
-
 dict_type =dict<[A-Za-z_][A-Za-z_0-9]*,[A-Za-z_][A-Za-z_0-9]*>
 
 seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
@@ -81,6 +79,8 @@ comment =\/\#(\#(\?!\/)|[^#])*\#\/
 	"print"			{ return symbol(sym.PRINT); }
 	"alias"			{ return symbol(sym.ALIAS); }
 	"tdef"			{ return symbol(sym.TDEF); }
+	"::"			{ return symbol(sym.CONCAT); }
+	"^"			{ return symbol(sym.POW); }
 	"!="			{ return symbol(sym.NEQ); }
 	"="			{ return symbol(sym.EQ); }
 	">="			{ return symbol(sym.GTE); }

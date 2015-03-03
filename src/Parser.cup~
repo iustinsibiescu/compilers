@@ -3,20 +3,22 @@ import java_cup.runtime.*;
 
 parser code {:
     
-	boolean syntaxErrors;
+	boolean syntaxErrors = false;
+
+	public void report_error (String message, Object info){
+		StringBuilder m = new StringBuilder("Error");
+		m.append(" : " + message);
+		System.out.println(m);	
+	}
 
 	public void syntax_error(Symbol current_token) {
-	syntaxErrors = true;
-	report_error(
-		"Syntax error at line " + (current_token.left+1) + ", column "
-		+ current_token.right + current_token.toString() +"\n\n\n\n\n", null
-	);
+		syntaxErrors = true;
+		report_error(
+			"Syntax error at line " + (current_token.left+1) + ", column "
+			+ current_token.right, null
+		);
 	}
-	public void report_fatal_error(String message, Object info) {
-		report_error("", null);
-		done_parsing();
-	}
-
+	
 :};
    
 
@@ -41,6 +43,8 @@ terminal
 	MINUS,
 	TIMES,
 	DIVIDE,
+	POW,
+	CONCAT,
 	GT,
 	GTE,
 	LT,
@@ -86,6 +90,7 @@ non terminal Object
 	return,
 	return_val,
 	formal_param_list,
+	param_declr,
 	main,
 	body,
 	while_block,
@@ -96,12 +101,14 @@ non terminal Object
 	stmt,
 	alias,
 	declr,
-	init_declr,
+	init_normal_declr,
 	normal_declr,
 	dict_declr,
+	init_dict_declr,
 	dict_value,
 	dict_body,
 	seq_declr,
+	init_seq_declr,
 	seq_value,
 	seq_elements,
 	slicing,
@@ -111,9 +118,11 @@ non terminal Object
 	loc,
 	array_element,
 	in_block,
+	concat_block,
 	iterable,
 	function_call,
 	param_list,
+	bool_list,
 	bool,
 	join,
 	equality,
@@ -122,6 +131,7 @@ non terminal Object
 	term,
 	unary,
 	factor,
+	concat_val,
 	numerical_val;
 
 
@@ -133,7 +143,10 @@ non terminal Object
 		;
 
 	function_declr ::= 
-		FDEF ID LPAREN formal_param_list RPAREN LCURL body return RCURL COLON type
+		FDEF ID LPAREN formal_param_list RPAREN LCURL body RCURL COLON type
+		| FDEF ID LPAREN formal_param_list RPAREN LCURL body RCURL COLON ID
+		| FDEF ID LPAREN formal_param_list RPAREN LCURL body RCURL COLON SEQ_TYPE
+		| FDEF ID LPAREN formal_param_list RPAREN LCURL body RCURL COLON DICT_TYPE
 		| FDEF ID LPAREN formal_param_list RPAREN LCURL body RCURL
 		;
 
@@ -166,9 +179,15 @@ non terminal Object
 		;
 
 	formal_param_list ::= 
-		normal_declr COMMA formal_param_list
-		| normal_declr
+		param_declr COMMA formal_param_list
+		| param_declr
 		|
+		;
+
+	param_declr ::=
+		normal_declr
+		| dict_declr
+		| seq_declr
 		;
 
 	main ::= 
@@ -212,6 +231,7 @@ non terminal Object
 		| while_block
 		| forall_block
 		| MAIN_RETURN
+		| return
 		| READ ID SEMI
 		| READ array_element SEMI
 		| PRINT bool SEMI
@@ -226,9 +246,11 @@ non terminal Object
 
 	declr ::= 
 		normal_declr SEMI
-		| init_declr SEMI
+		| init_normal_declr SEMI
 		| dict_declr SEMI
+		| init_dict_declr SEMI
 		| seq_declr SEMI
+		| init_seq_declr SEMI
 		| function_declr SEMI
 		| type_declr SEMI
 		| alias SEMI
@@ -236,15 +258,19 @@ non terminal Object
 
 	normal_declr ::= 
 		ID COLON type
+		| ID COLON ID
 		;
 
-	init_declr ::= 
+	init_normal_declr ::= 
 		normal_declr assignment
 		;
 
 	dict_declr ::=
+		ID COLON DICT_TYPE
+		;
+
+	init_dict_declr ::=
 		ID COLON DICT_TYPE ASSIGN dict_value
-		| ID COLON DICT_TYPE
 		;
 
 	dict_value ::=
@@ -258,8 +284,15 @@ non terminal Object
 		;
 
 	seq_declr ::=
+		ID COLON SEQ_TYPE
+		;
+
+	init_seq_declr ::=
 		ID COLON SEQ_TYPE ASSIGN seq_value
-		| ID COLON SEQ_TYPE
+		| ID COLON SEQ_TYPE ASSIGN concat_block
+		| ID COLON SEQ_TYPE ASSIGN STRING_VALUE
+		| ID COLON SEQ_TYPE ASSIGN slicing
+		| ID COLON SEQ_TYPE ASSIGN function_call
 		;
 
 	seq_value ::=
@@ -280,14 +313,16 @@ non terminal Object
 		;
 
 	slicing_index ::=
-		ID
-		| INTEGER_NUMBER
-		| function_call
+		bool
 		;
 
+	bool_list ::= 
+		bool COMMA bool_list
+		| bool
+		; 
 
 	assignment ::= 
-		ASSIGN bool
+		ASSIGN bool_list
 		;
 
 	type ::= 
@@ -309,6 +344,7 @@ non terminal Object
 		| array_element 
 		| STRING_VALUE
 		| slicing
+		| concat_block
 		;
 
 	array_element ::=
@@ -320,6 +356,11 @@ non terminal Object
 
 	in_block ::= 
 		bool IN iterable
+		;
+
+	concat_block ::=
+		concat_val CONCAT concat_block
+		| concat_val CONCAT concat_val
 		;
 
 	iterable ::=
@@ -373,6 +414,7 @@ non terminal Object
 	term ::=
 		term TIMES unary
 		| term DIVIDE unary
+		| term POW unary
 		| unary
 		;
 
@@ -387,6 +429,14 @@ non terminal Object
 		| loc
 		;
 		
+	concat_val ::=
+		STRING_VALUE
+		| slicing
+		| seq_value
+		| array_element
+		| ID
+		;
+
 	numerical_val ::= 
 		INTEGER_NUMBER
 		| FLOAT_NUMBER
