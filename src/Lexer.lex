@@ -44,15 +44,13 @@ val ={integer}|{rational}|{float}|{boolean}|{character}|{id}
 
 dict_type =dict<[A-Za-z_][A-Za-z_0-9]*,[A-Za-z_][A-Za-z_0-9]*>
 
-dict_value =\{\}|\{({val}:{val},)*({val}:{val})\}
-
 seq_type =seq<[A-Za-z_][A-Za-z_0-9]*>
 
 string =\"([A-Za-z]|[0-9]|[#-~]|[ -!]|\r|\n|\r\n)*\"
 
 line_comment =#.*\n
 
-comment =\/#(.|{LineTerminator})*#\/
+comment =\/\#(\#(\?!\/)|[^#])*\#\/
 
 %%
 
@@ -60,7 +58,7 @@ comment =\/#(.|{LineTerminator})*#\/
 <YYINITIAL> {
 	{dict_type}		{ return symbol(sym.DICT_TYPE); }
 	{seq_type}		{ return symbol(sym.SEQ_TYPE); }
-	{dict_value}		{ return symbol(sym.DICT_VALUE); }
+
 	{string}		{ return symbol(sym.STRING_VALUE); }
 
 	"main"			{ return symbol(sym.MAIN); } 
@@ -81,6 +79,8 @@ comment =\/#(.|{LineTerminator})*#\/
 	"in"			{ return symbol(sym.IN); }
 	"read"			{ return symbol(sym.READ); }
 	"print"			{ return symbol(sym.PRINT); }
+	"alias"			{ return symbol(sym.ALIAS); }
+	"tdef"			{ return symbol(sym.TDEF); }
 	"!="			{ return symbol(sym.NEQ); }
 	"="			{ return symbol(sym.EQ); }
 	">="			{ return symbol(sym.GTE); }
@@ -94,6 +94,7 @@ comment =\/#(.|{LineTerminator})*#\/
 	":"			{ return symbol(sym.COLON);}
 	","			{ return symbol(sym.COMMA); }
 	";"			{ return symbol(sym.SEMI); }
+	"."			{ return symbol(sym.DOT); }
 	"+"			{ return symbol(sym.PLUS); }
 	"-"			{ return symbol(sym.MINUS); }
 	"*"			{ return symbol(sym.TIMES); }

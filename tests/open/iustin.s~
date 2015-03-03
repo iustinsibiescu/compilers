@@ -1,30 +1,11 @@
 main {
 	
-  s1:int := sum(-10_1/2,20);
-  s2:float := sum(10.0,-20.0);
-  b:bool;
-   a : seq<top> := [isd[1:v],[]];
-	a : seq<top> := "asdaf   "      dsf
-\n";
-
-	f(a);
-	#
-#
-  if (s in cacat[2]) then
-     b  :=  s1 + s2 / (s1 + s2) <= 30;
-	fi
-
-	forall (s in cacat[2:6]) do
-		 b  :=  s1 + s2 / (s1 + s2) <= 30;
-	od
-	/#read a;
-	#print a;#/
-#
-#
-#
-#
-
-	
+	alias seq<char> string;
+	alias fred spud;
+	tdef person { name:int, jk:string, sadfsadf:safdasdf };
+	a : seq<int> := ["aSASD","assaf"];
+	a : dict<int,sads> := {1:'a', 1:"21412"};
+	return;
 };
 
 

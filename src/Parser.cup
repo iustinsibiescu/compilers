@@ -33,7 +33,6 @@ terminal
 	CHARACTER_VALUE,
 	INTEGER_NUMBER,
 	FLOAT_NUMBER,
-	DICT_VALUE,
 	SEQ_VALUE,
 	RATIONAL_NUMBER,
 	STRING_VALUE,
@@ -54,6 +53,7 @@ terminal
 	NOT,
 	SEMI,
 	COLON,
+	DOT,
 	ASSIGN,
 	IF,
 	FI,
@@ -66,6 +66,7 @@ terminal
 	IN,
 	READ,
 	PRINT,
+	ALIAS,
 	MAIN,
 	LBRACKET,
 	RBRACKET,
@@ -74,11 +75,15 @@ terminal
 	COMMA,
 	RETURN,
 	MAIN_RETURN,
-	FDEF;
+	FDEF,
+	TDEF;
 
 non terminal Object
 	program,
 	function_declr,
+	type_declr,
+	type_body,
+	type_value,
 	return,
 	return_val,
 	formal_param_list,
@@ -90,6 +95,7 @@ non terminal Object
 	declrs,
 	stmts,
 	stmt,
+	alias,
 	declr,
 	init_declr,
 	normal_declr,
@@ -130,6 +136,26 @@ non terminal Object
 	function_declr ::= 
 		FDEF ID LPAREN formal_param_list RPAREN LCURL body return RCURL COLON type
 		| FDEF ID LPAREN formal_param_list RPAREN LCURL body RCURL
+		;
+
+	type_declr ::=
+		TDEF ID type_value
+		; 
+
+	type_value ::=
+		LCURL type_body RCURL
+		;
+
+	type_body ::=
+		ID COLON ID COMMA type_body
+		| ID COLON ID
+		| ID COLON type COMMA type_body
+		| ID COLON type
+		| ID COLON SEQ_TYPE COMMA type_body
+		| ID COLON SEQ_TYPE
+		| ID COLON DICT_TYPE COMMA type_body
+		| ID COLON DICT_TYPE
+		|
 		;
 
 	return ::= 
@@ -181,9 +207,8 @@ non terminal Object
 
 	stmt ::= 
 		ID assignment SEMI
-		| ID ASSIGN STRING_VALUE SEMI
 		| function_call SEMI
-		| array_element SEMI
+		| array_element assignment SEMI
 		| if_block
 		| while_block
 		| forall_block
@@ -193,7 +218,12 @@ non terminal Object
 		| PRINT bool SEMI
 		;
 
-	
+	alias ::=
+		ALIAS type ID
+		| ALIAS DICT_TYPE ID
+		| ALIAS SEQ_TYPE ID
+		| ALIAS ID ID
+		;
 
 	declr ::= 
 		normal_declr SEMI
@@ -201,6 +231,8 @@ non terminal Object
 		| dict_declr SEMI
 		| seq_declr SEMI
 		| function_declr SEMI
+		| type_declr SEMI
+		| alias SEMI
 		;
 
 	normal_declr ::= 
@@ -277,16 +309,18 @@ non terminal Object
 		ID
 		| numerical_val
 		| BOOLEAN_VALUE
-		
 		| CHARACTER_VALUE
-		| DICT_VALUE
+		| dict_value
 		| SEQ_VALUE
 		| function_call
 		| array_element 
+		| STRING_VALUE
 		;
 
 	array_element ::=
 		ID LBRACKET loc RBRACKET
+		| ID DOT ID
+		| ID LBRACKET loc RBRACKET DOT ID
 		;
 	
 
