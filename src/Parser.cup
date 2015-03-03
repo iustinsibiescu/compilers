@@ -33,7 +33,6 @@ terminal
 	CHARACTER_VALUE,
 	INTEGER_NUMBER,
 	FLOAT_NUMBER,
-	SEQ_VALUE,
 	RATIONAL_NUMBER,
 	STRING_VALUE,
 	LPAREN,
@@ -265,18 +264,12 @@ non terminal Object
 
 	seq_value ::=
 		LBRACKET seq_elements RBRACKET
-		| slicing
-		| STRING_VALUE
 		;
 
 
 	seq_elements ::= 
 		bool COMMA seq_elements
 		| bool
-		| LBRACKET seq_elements RBRACKET COMMA seq_elements
-		| LBRACKET seq_elements RBRACKET
-		| slicing COMMA seq_elements
-		| slicing
 		|
 		;
 
@@ -311,10 +304,11 @@ non terminal Object
 		| BOOLEAN_VALUE
 		| CHARACTER_VALUE
 		| dict_value
-		| SEQ_VALUE
+		| seq_value
 		| function_call
 		| array_element 
 		| STRING_VALUE
+		| slicing
 		;
 
 	array_element ::=
